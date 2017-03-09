@@ -1,5 +1,6 @@
 import React from 'react';
 import {render} from 'react-dom';
 import Greeter from './Greeter';
+import ShoppingList from './shoppingList';
 
-render(<Greeter />, document.getElementById('root'));
+render(<div><Greeter /> <ShoppingList name="Mark"/></div>, document.getElementById('root'));
