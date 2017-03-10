@@ -1,6 +1,7 @@
 import React from 'react';
-import {render} from 'react-dom';
-import Greeter from './Greeter';
-import ShoppingList from './shoppingList';
+import ReactDOM from 'react-dom';
 
-render(<div><Greeter /> <ShoppingList name="Mark"/></div>, document.getElementById('root'));
+ReactDOM.render(
+  <h1>Hello, world!</h1>,
+  document.getElementById('root')
+);
