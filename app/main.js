@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 /*
-React elements are immutable.
-create a new element.
+React DOM compares the element and its children to the previous one,
+and only applies the DOM updates necessary to bring the DOM to the desired state.
+比较&&更新必要的部分
 */
 
 function tick() {
@@ -14,7 +15,7 @@ function tick() {
   );
   ReactDOM.render(
     element,
-    document.getElementById('root') // 兄弟节点会被覆盖, 所以节此点下总是只有本次render结果.g
+    document.getElementById('root')
   );
 }
 
