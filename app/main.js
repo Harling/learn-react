@@ -1,22 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-/* Functional */
-function WelcomeF(props) {
-  return <h1>Hello, {props.name}</h1>;
-}
+/*
+Previously, we only encountered React elements that represent DOM tags:
+// const element = <div />;
 
-/* Class */
-class WelcomeC extends React.Component {
+However, elements can also represent user-defined components:
+//const element = <Welcome name="Sara" />;
+ */
+
+class Welcome extends React.Component {
   render() {
     return <h1>Hello, {this.props.name}</h1>;
   }
 }
 
+const element = <Welcome name="Harling" />;
+
 ReactDOM.render(
-  <div>
-    <WelcomeF name="Functional Component" />
-    <WelcomeC name="Class Component" />
-  </div>,
+  element,
   document.getElementById('root')
 );
