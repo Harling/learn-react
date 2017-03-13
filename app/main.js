@@ -1,42 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-/*
-lifecycle hooks
-mounting, unmounting
-constructor -> render -> componentDidMount -> componentWillUnmount
-*/
-
-class Clock extends React.Component {
-  constructor(props) { // init state
-    super(props);
-    this.state = {date: new Date()};
-  }
-  componentDidMount() {
-    this.timerID = setInterval(
-      () => this.tick(),
-      1000
-    );
-  }
-  componentWillUnmount() {
-    clearInterval(this.timerID);
-  }
-  tick() {
-    this.setState({
-      date: new Date()
-    });
-  }
+class ActionLink extends React.Component {
   render() {
     return (
-      <div>
-        <h1>Hello, world!</h1>
-        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
-      </div>
+      <a href="#" onClick={this.handleClick}>
+        Click me
+      </a>
     );
+  }
+  handleClick(e) {
+    e.preventDefault();
+    console.log('The link was clicked.');
   }
 }
 
+
 ReactDOM.render(
-  <Clock />,
+  <ActionLink />,
   document.getElementById('root')
 );
