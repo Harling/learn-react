@@ -34,11 +34,11 @@ class TemperatureInput extends React.Component {
   }
 
   handleChange(e) {
-    this.setState({temperature: e.target.value});
+    this.props.onTemperatureChange(e.target.value);
   }
 
   render() {
-    const temperature = this.state.temperature;
+    const temperature = this.props.temperature;
     const scale = this.props.scale;
     return (
       <fieldset>
@@ -50,7 +50,6 @@ class TemperatureInput extends React.Component {
   }
 }
 
-
 function BoilingVerdict(props) {
   if (props.celsius >= 100) {
     return <p>The water would boil.</p>;
@@ -58,19 +57,48 @@ function BoilingVerdict(props) {
   return <p>The water would not boil.</p>;
 }
 
-
 class Calculator extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleCelsiusChange = this.handleCelsiusChange.bind(this); // callback
+    this.handleFahrenheitChange = this.handleFahrenheitChange.bind(this); //callback
+    this.state = {temperature: '', scale: 'c'}; //!! default
+  }
+
+  handleCelsiusChange(temperature) {
+    this.setState({scale: 'c', temperature});
+  }
+
+  handleFahrenheitChange(temperature) {
+    this.setState({scale: 'f', temperature});
+  }
+
   render() {
+    const scale = this.state.scale;
+    const temperature = this.state.temperature;
+    const celsius = scale === 'f' ? tryConvert(temperature, toCelsius) : temperature;   //!! transform
+    const fahrenheit = scale === 'c' ? tryConvert(temperature, toFahrenheit) : temperature; //!! transform
+
     return (
       <div>
-        <TemperatureInput scale="c" />
-        <TemperatureInput scale="f" />
+        {/* c */}
+        <TemperatureInput
+          scale="c"
+          temperature={celsius}
+          onTemperatureChange={this.handleCelsiusChange} />
+        {/* f */}
+        <TemperatureInput
+          scale="f"
+          temperature={fahrenheit}
+          onTemperatureChange={this.handleFahrenheitChange} />
+        <BoilingVerdict
+          celsius={parseFloat(celsius)} />
       </div>
     );
   }
 }
 
-
+{/* render component */}
 ReactDOM.render(
   <Calculator />,
   document.getElementById('root')
